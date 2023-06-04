@@ -1,7 +1,7 @@
-import {Authenticator} from "https://unpkg.com/netlify-auth-providers"
+const netlify = require("netlify-auth-providers")
 
 export default () => {
-    const authenticator = new Authenticator()
+    const authenticator = new netlify.default({});
     authenticator.authenticate(
         // Set the OAuth provider and token scope
         // Provider can be "github", "gitlab", or "bitbucket"
