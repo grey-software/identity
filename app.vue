@@ -2,6 +2,7 @@
 <template>
   <Navbar class="navbar" />
   <NuxtPage class="page" />
+  <NuxtSnackbar />
   <Footer class="footer" />
 </template>
 

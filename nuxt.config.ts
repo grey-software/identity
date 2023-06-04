@@ -47,6 +47,7 @@ export default defineNuxtConfig({
     "@nuxtjs/color-mode",
     "@unocss/nuxt",
     "@nuxt/content",
+    "nuxt-snackbar",
   ],
   colorMode: {
     preference: "system", // default value of $colorMode.preference
@@ -63,6 +64,9 @@ export default defineNuxtConfig({
       },
     ],
   },
+  snackbar: {
+    bottom: true,
+    right: true,
+    duration: 5000,
+  },
 });
-
-

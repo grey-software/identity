@@ -20,6 +20,8 @@
     "nuxt-icon": "^0.4.1"
   },
   "dependencies": {
-    "netlify-auth-providers": "1.0.0-alpha5"
+    "@netlify/functions": "^1.6.0",
+    "netlify-auth-providers": "1.0.0-alpha5",
+    "nuxt-snackbar": "^1.0.3"
   }
 }
