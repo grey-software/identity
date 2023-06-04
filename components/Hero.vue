@@ -9,7 +9,9 @@ const startFlow = () => {
 
   event.preventDefault();
 
-  const authenticator = new netlify.default({});
+  const authenticator = new netlify.default({
+    site_id: "6c23b469-318c-4bd0-b973-d6c169f5fcbd"
+  });
   console.log(authenticator);
 
   authenticator.authenticate(

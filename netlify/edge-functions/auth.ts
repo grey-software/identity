@@ -1,4 +1,4 @@
-const netlify = require("netlify-auth-providers")
+import * as netlify from "netlify-auth-providers"
 
 export default () => {
     const authenticator = new netlify.default({});
@@ -7,13 +7,12 @@ export default () => {
         // Provider can be "github", "gitlab", or "bitbucket"
         // The scopes available depend on your OAuth provider
         { provider: "github", scope: "user" },
-        async function (error, data) {
+        async function (error: any, data: any) {
             if (error) {
                 return new Response("Error Authenticating with GitHub: " + error)
             } else {
                 let responseString = "Authenticated with GitHub. Access Token: " + data.token
                 responseString += "\n"
-                responseString += await loadGitHubUserEmails(data.token);
                 return new Response(responseString)
             }
         }
