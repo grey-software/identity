@@ -35,7 +35,7 @@ export default defineNuxtConfig({
           content: "/preview.png",
         },
       ],
-      script: [],
+      script: [{ src: "https://unpkg.com/netlify-auth-providers" }],
     },
   },
   ssr: false,
