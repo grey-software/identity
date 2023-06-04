@@ -7,7 +7,7 @@ export default () => {
     // Provider can be "github", "gitlab", or "bitbucket"
     // The scopes available depend on your OAuth provider
     { provider: "github", scope: "user" },
-    async function (error: any, data: any) {
+    async function (error, data) {
       if (error) {
         return new Response("Error Authenticating with GitHub: " + error);
       } else {
