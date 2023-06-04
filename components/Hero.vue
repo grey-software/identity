@@ -1,14 +1,16 @@
 <script setup>
-const outputToken = document.getElementById("output-token");
-const outputEmail = document.getElementById("output-email");
+let outputTokenText = ref("Not authenticated yet");
+let outputEmail = ref("Not token yet");
+let buttonText = ref("Login");
 
 const startFlow = () => {
   console.log("clicked");
+  buttonText.value = "Loading...";
 
   event.preventDefault();
 
   const authenticator = new netlify.default({});
-  console.log(authenticator)
+  console.log(authenticator);
 
   authenticator.authenticate(
     // Set the OAuth provider and token scope
@@ -17,11 +19,11 @@ const startFlow = () => {
     { provider: "github", scope: "user" },
     async function (error, data) {
       if (error) {
-        outputToken.innerText = "Error Authenticating with GitHub: " + error;
+        outputTokenText.value = "Error Authenticating with GitHub: " + error;
       } else {
-        outputToken.innerText =
+        outputTokenText.value =
           "Authenticated with GitHub. Access Token: " + data.token;
-        outputEmail.innerText = await loadGitHubUserEmails(data.token);
+        outputEmail.value = await loadGitHubUserEmails(data.token);
       }
     }
   );
@@ -50,11 +52,15 @@ async function loadGitHubUserEmails(token) {
     </h1>
     <div class="cta-container">
       <h1>GitHub Authentication Example:</h1>
-      <p><a href="#" id="login" @click="startFlow">Authenticate</a></p>
-      <p>Token: <span id="output-token">Not authenticated yet</span></p>
+      <p>
+        <a href="#" id="login" @click="startFlow">{{ buttonText }}</a>
+      </p>
+      <p>
+        Token: <span id="output-token">{{ outputTokenText }}</span>
+      </p>
       <p>
         User emails:
-        <span id="output-email">Not authenticated yet</span>
+        <span id="output-email">{{ outputEmail }}</span>
       </p>
     </div>
   </header>
