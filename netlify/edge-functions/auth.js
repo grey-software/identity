@@ -1,7 +1,7 @@
 import netlify from "https://esm.sh/netlify-auth-providers";
 
 export default () => {
-  const authenticator = new netlify.default({});
+  const authenticator = new netlify({});
   authenticator.authenticate(
     // Set the OAuth provider and token scope
     // Provider can be "github", "gitlab", or "bitbucket"
