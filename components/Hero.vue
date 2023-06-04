@@ -1,18 +1,62 @@
-<script setup lang="ts"></script>
+<script>
+import netlify from "netlify-auth-providers"
+const anchorTag = document.getElementById("login");
+const outputToken = document.getElementById("output-token");
+const outputEmail = document.getElementById("output-email");
+
+anchorTag?.addEventListener("click", (event) => {
+  event.preventDefault();
+
+  const authenticator = new netlify.default({});
+
+  authenticator.authenticate(
+    // Set the OAuth provider and token scope
+    // Provider can be "github", "gitlab", or "bitbucket"
+    // The scopes available depend on your OAuth provider
+    { provider: "github", scope: "user" },
+    async function (error, data) {
+      if (error) {
+        outputToken.innerText = "Error Authenticating with GitHub: " + error;
+      } else {
+        outputToken.innerText =
+          "Authenticated with GitHub. Access Token: " + data.token;
+        outputEmail.innerText = await loadGitHubUserEmails(data.token);
+      }
+    }
+  );
+});
+
+async function loadGitHubUserEmails(token) {
+  return await fetch("https://api.github.com/user/emails", {
+    headers: {
+      Accept: "application/vnd.github.v3+json",
+      Authorization: `token ${token}`,
+    },
+  })
+    .then((response) => response.json())
+    .then((response) => JSON.stringify(response));
+}
+</script>
 
 <template>
   <header class="hero">
     <h1 class="hero-title text-left tab-pt:text-center">
       Bootcamps <br class="block tab-pt:hidden" />
       <span class="text-accent"> & Universities</span>
-      <br class="hidden tab-pt:block"/>
-      Can't Teach You  <br class="hidden mob-lg:block" />
+      <br class="hidden tab-pt:block" />
+      Can't Teach You <br class="hidden mob-lg:block" />
       Everything!
     </h1>
-    <!-- <div class="cta-container">
+    <div class="cta-container">
       <ButtonPrimary link="https://resources.grey.software" text="Resources" />
-      <ButtonSecondary link="https://linkedin.com/in/arsalabangash" text="Mentorship" />
-    </div> -->
+    </div>
+    <h1>GitHub Authentication Example:</h1>
+    <p><a href="#" id="login">Authenticate</a></p>
+    <p>Token: <span id="output-token">Not authenticated yet</span></p>
+    <p>
+      User emails:
+      <span id="output-email">Not authenticated yet</span>
+    </p>
   </header>
 </template>
 
