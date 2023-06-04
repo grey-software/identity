@@ -1,4 +1,4 @@
-import Authenticator from "https://unpkg.com/netlify-auth-providers"
+import {Authenticator} from "https://unpkg.com/netlify-auth-providers"
 
 export default () => {
     const authenticator = new Authenticator()
