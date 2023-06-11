@@ -1,7 +1,7 @@
 <template>
   <header class="hero">
     <h1 class="hero-title text-left tab-pt:text-center">
-      Your Login <br/> Was {{ route.params.error ? "👍" : "👎" }}
+      Your Login <br/> Was {{ route.params.error ?  "👎" : "👍" }}
     </h1>
   </header>
 </template>
