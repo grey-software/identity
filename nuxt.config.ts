@@ -1,7 +1,7 @@
 export default defineNuxtConfig({
   app: {
     head: {
-      title: "Grey Software Resources",
+      title: "Grey Software Identity",
       link: [
         {
           rel: "icon",

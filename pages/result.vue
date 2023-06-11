@@ -1,46 +1,14 @@
 <template>
   <header class="hero">
     <h1 class="hero-title text-left tab-pt:text-center">
-      Verify Your <br />Sponsorship
+      Your Login <br/> Was {{ route.params.error ? "👍" : "👎" }}
     </h1>
-    <div class="cta-container">
-      <a href="#" id="login" @click="login"
-        ><Icon name="logos-github-icon" /> <span class="pl-2">Sign In </span>
-      </a>
-    </div>
   </header>
 </template>
 
 <script setup>
-const snackbar = useSnackbar();
+const route = useRoute()
 
-const authenticator = new netlify.default({
-  site_id: "6c23b469-318c-4bd0-b973-d6c169f5fcbd",
-});
-
-const login = async () => {
-  authenticator.authenticate(
-    { provider: "github", scope: "user read:org" },
-    async function (error, data) {
-      if (error) {
-        await navigateTo({
-          path: "/result",
-          query: {
-            error: 1
-          },
-        });
-      } else {
-        await navigateTo({
-          path: "/result",
-          query: {
-            token: data.token,
-            error: 0,
-          },
-        });
-      }
-    }
-  );
-};
 </script>
 
 <style scoped>
